@@ -1,0 +1,53 @@
+SLE-3: Architectural Design (Full C4 Model)
+Course: 02AML204 – Introduction to Artificial Intelligence
+PRN: 25UAM052
+Name: Maitryee Dilip Jadhav
+Division: A
+Date: October 4, 2026
+GitHub / Portfolio Link: https://github.com/maitryeejadhav20/main_profilingS
+
+--------------------------------------------------
+
+1. System Title & Short Description
+System Title: Grid-Based Maze Solver & Pathfinding System
+Description: This system is an interactive software application that computes optimal paths through 2D grid mazes containing obstacles. It allows users to input custom grid configurations, designate start and goal nodes, and select pathfinding algorithms such as Breadth-First Search (BFS) or A* Search. The system computes the shortest path while recording execution speed and node expansion counts.
+
+2. Context Diagram (Level 1)
+ 
+Short explanation: The Context diagram illustrates the high-level system boundary and its interaction with the user. The User (Operator) supplies the grid dimensions, obstacle coordinates, and desired algorithm choice (BFS or A*) to the Maze Solver System. The system processes the input graph and returns the visualized solution path along with performance statistics back to the user.
+
+3. Container Diagram (Level 2)
+ 
+Explanation of containers:
+- Input Module: Receives grid configurations, start/goal coordinates, and algorithm settings from the user.
+- Search Engine: Holds the core algorithmic execution logic for BFS and A* pathfinding.
+- Heuristic Module: Computes Manhattan/Euclidean distance metrics specifically when the A* algorithm is selected.
+- Output Module: Formats the computed path array and renders performance metrics for presentation.
+
+4. Component Diagram (Level 3)
+ 
+Short explanation of components (Inside Search Engine):
+- Frontier / Open List: Manages candidate nodes pending exploration using appropriate data structures (Priority Queue for A*, Queue for BFS).
+- Explored Set / Closed List: Stores visited node coordinates to prevent redundant evaluations and infinite loops.
+- Goal Test Module: Checks whether the current popped node matches the target goal coordinates.
+- Path Reconstructor: Traverses parent pointer references backwards from the goal node to reconstruct the complete path sequence.
+
+5. Code Level Overview (Level 4)
+- class Node: Represents grid cells with attributes (x, y), g_cost, h_cost, f_cost, and a parent reference pointer.
+- class MazeGrid: Holds the 2D grid layout array, start/goal node objects, and boundary check validation functions.
+- def astar_search(grid, start, goal): Main A* algorithm driver managing the open priority queue and closed evaluation set.
+- def bfs_search(grid, start, goal): Queue-based BFS pathfinding algorithm driver.
+- def calculate_heuristic(node, goal): Helper function computing the Manhattan distance between current node and goal.
+- def reconstruct_path(current_node): Backtracks parent references to output the final list of coordinates.
+
+6. Design Decisions
+- Decoupled Heuristic Module: Separating heuristic calculations from the core search engine allows support for custom distance formulas without altering core search logic.
+- Explicit Explored Set: Using a hash-set lookup structure for the closed list ensures O(1) node lookup time, keeping overall search overhead low during dense graph traversals.
+
+7. AI Contribution Note
+- AI tools used: ChatGPT / Gemini
+- What AI helped with: Generating Mermaid diagram code syntax and structuring report text into the C4 template format.
+- What I did myself: Configured system boundary specifications, mapped BFS and A* algorithm components, and matched functions to my actual codebase implementation.
+
+8. Conclusion
+Designing the C4 model architecture provided a clear multi-tiered understanding of the software structure across system boundaries, internal components, and code implementations. Abstraction levels helped clarify data flow between UI input modules and core algorithmic containers. This design document bridges abstract algorithm theory with modular, maintainable software design.
